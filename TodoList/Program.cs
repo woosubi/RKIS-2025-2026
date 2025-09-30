@@ -12,8 +12,9 @@
 
             Console.Write("Введите ваш год рождения: ");
             int birthday = int.Parse(Console.ReadLine());
+            int age = DateTime.Now.Year - birthday;
 
-            string text = "Добавлен пользователь " + firstName + " " + lastName + ", возраст - " + (DateTime.Now.Year - birthday);
+            string text = "Добавлен пользователь " + firstName + " " + lastName + ", возраст - " + age;
             Console.WriteLine(text);
 
             while (true)
@@ -29,6 +30,20 @@
                     Console.WriteLine("add \"текст задачи\" — добавляет новую задачу");
                     Console.WriteLine("view — выводит все задачи");
                     Console.WriteLine("exit — выход из программы");
+                }
+                else if (command == "profile")
+                {
+                    Console.WriteLine(firstName + " " + lastName + ", - " + age);
+                }
+
+                else if (command == "exit")
+                {
+                    Console.WriteLine("Выход из программы.");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Неизвестная команда.");
                 }
             }
         }
