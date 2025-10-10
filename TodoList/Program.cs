@@ -2,20 +2,12 @@
 {
     class Program
     {
+        static string firstName, lastName;
+        static int age;
         public static void Main()
         {
             Console.WriteLine("Выполнили курсанты группы 3833 Кучеренко и Мурза");
-            Console.Write("Введите ваше имя: "); 
-            string firstName = Console.ReadLine();
-            Console.Write("Введите вашу фамилию: ");
-            string lastName = Console.ReadLine();
-
-            Console.Write("Введите ваш год рождения: ");
-            int birthday = int.Parse(Console.ReadLine());
-            int age = DateTime.Now.Year - birthday;
-
-            string text = "Добавлен пользователь " + firstName + " " + lastName + ", возраст - " + age;
-            Console.WriteLine(text);
+            AddUser();
 
             string[] todos = new string[2];
             int index = 0;
@@ -49,7 +41,7 @@
                     string task = command.Split("add ")[1];
                     if (index == todos.Length)
                     {
-                        string[] newTodos = new string[todos.Length*2];
+                        string[] newTodos = new string[todos.Length * 2];
                         for (int i = 0; i < todos.Length; i++)
                         {
                             newTodos[i] = todos[i];
@@ -79,6 +71,20 @@
                     Console.WriteLine("Неизвестная команда.");
                 }
             }
+        }
+        private static void AddUser()
+        {
+            Console.Write("Введите ваше имя: "); 
+            firstName = Console.ReadLine();
+            Console.Write("Введите вашу фамилию: ");
+            lastName = Console.ReadLine();
+
+            Console.Write("Введите ваш год рождения: ");
+            int year = int.Parse(Console.ReadLine());
+            age = DateTime.Now.Year - year;
+
+            string text = "Добавлен пользователь " + firstName + " " + lastName + ", возраст - " + age;
+            Console.WriteLine(text);
         }
     }
 }
