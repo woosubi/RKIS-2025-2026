@@ -114,7 +114,14 @@
         }
         private static void UpdateTodo(string command)
         {
-            throw new NotImplementedException();
+            var parts = command.Split(' ', 3);
+            int index = int.Parse(parts[1]);
+            string task = parts[2];
+            
+            todos[index] = task;
+            dates[index] = DateTime.Now;
+            
+            Console.WriteLine("Задача обновлена");
         }
         private static void ViewTodo()
         {
@@ -127,7 +134,7 @@
                 
                 if (!string.IsNullOrEmpty(todo))
                 {
-                    Console.WriteLine(i + ") " + date + " - " +  todo + " выполнена: " + status);
+                    Console.WriteLine(i + ") " + date + " - " + todo + " выполнена: " + status);
                 }
             }
         }
