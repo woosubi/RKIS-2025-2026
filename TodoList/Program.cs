@@ -75,7 +75,18 @@
         }
         private static void ViewTodo()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Задачи:");
+            for (int i = 0; i < todos.Length; i++)
+            {
+                string todo = todos[i];
+                bool status = statuses[i];
+                DateTime date = dates[i];
+                
+                if (!string.IsNullOrEmpty(todo))
+                {
+                    Console.WriteLine(i + ") " + date + " - " +  todo + " выполнена: " + status);
+                }
+            }
         }
     }
 }
