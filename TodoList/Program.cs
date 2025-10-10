@@ -67,7 +67,23 @@
         }
         private static void DeleteTodo(string command)
         {
-            throw new NotImplementedException();
+            var parts = command.Split(' ', 2);
+            int index = int.Parse(parts[1]);
+            Console.WriteLine("Задача " + todos[index] + " удалена");
+            string[] newTodos = new string[todos.Length];
+            bool[] newStatuses = new bool[todos.Length];
+            DateTime[] newDates = new DateTime[todos.Length];
+            for (int i = 0; i < todos.Length; i++)
+            {
+                if (i == index) continue;
+                newTodos[i] = todos[i];
+                newStatuses[i] = statuses[i];
+                newDates[i] = dates[i];
+            }
+            
+            todos = newTodos;
+            statuses = newStatuses;
+            dates = newDates;
         }
         private static void UpdateTodo(string command)
         {
