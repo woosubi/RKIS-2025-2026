@@ -32,11 +32,38 @@
         }
         private static void AddTodo(string command)
         {
-            throw new NotImplementedException();
+            string task = command.Split("add ", 2)[1];
+            if (index == todos.Length)
+            {
+                string[] newTodos = new string[todos.Length*2];
+                bool[] newStatuses = new bool[todos.Length*2];
+                DateTime[] newDates = new DateTime[todos.Length*2];
+                for (int i = 0; i < todos.Length; i++)
+                {
+                    newTodos[i] = todos[i];
+                    newStatuses[i] = statuses[i];
+                    newDates[i] = dates[i];
+                }
+
+                todos = newTodos;
+                statuses = newStatuses;
+                dates = newDates;
+            }
+
+            todos[index] = task;
+            statuses[index] = false;
+            dates[index] = DateTime.Now;
+
+            Console.WriteLine("Добавлена задача: " + index + ") " + task);
+            index++;
         }
         private static void DoneTodo(string command)
         {
-           throw new NotImplementedException();
+            var parts = command.Split(' ', 2);
+            int index = int.Parse(parts[1]);
+            statuses[index] = true;
+
+            Console.WriteLine("Задача " + todos[index] + " отмечена выполненной");
         }
         private static void DeleteTodo(string command)
         {
