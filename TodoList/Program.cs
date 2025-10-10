@@ -30,6 +30,33 @@
                 else Console.WriteLine("Неизвестная команда.");
             }
         }
+        private static void AddUser()
+        {
+            Console.Write("Введите ваше имя: "); 
+            firstName = Console.ReadLine();
+            Console.Write("Введите вашу фамилию: ");
+            lastName = Console.ReadLine();
+
+            Console.Write("Введите ваш год рождения: ");
+            int year = int.Parse(Console.ReadLine());
+            age = DateTime.Now.Year - year;
+
+            string text = "Добавлен пользователь " + firstName + " " + lastName + ", возраст - " + age;
+            Console.WriteLine(text);
+        }
+        private static void HelpCommand()
+        {
+            Console.WriteLine("Команды:");
+            Console.WriteLine("help — выводит список всех доступных команд с кратким описанием");
+            Console.WriteLine("profile — выводит данные пользователя");
+            Console.WriteLine("add \"текст задачи\" — добавляет новую задачу");
+            Console.WriteLine("view — выводит все задачи");
+            Console.WriteLine("exit — выход из программы");
+        }
+        private static void ShowProfile()
+        {
+            Console.WriteLine(firstName + " " + lastName + ", - " + age);
+        }
         private static void AddTodo(string command)
         {
             string task = command.Split("add ", 2)[1];
