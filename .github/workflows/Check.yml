@@ -150,7 +150,19 @@ jobs:
                           # пример строки:
                           # /path/Program.cs(1,1): error WHITESPACE: Fix whitespace...
                           # Program.cs(97,14): warning IDE0040: Требуются модификаторы доступа [...]
-                          echo "$line"
+                          if [[ "$line" =~ ^(Warning: |Error: )?(.*)\(([0-9]+),([0-9]+)\):[[:space:]]*(error|warning)[[:space:]]*([A-Z0-9_]*)?:?[[:space:]]*(.*)$ ]]; then
+                              file="${BASH_REMATCH[2]}"
+                              line_number="${BASH_REMATCH[3]}"
+                              col_number="${BASH_REMATCH[4]}"
+                              severity="${BASH_REMATCH[5]}"
+                              code="${BASH_REMATCH[6]}"
+                              msg="${BASH_REMATCH[7]}"
+                              file="${file#./}"
+                              echo "::warning file=$file,line=$line_number,col=$col_number::${code}: ${msg}"
+                          else
+                              # fallback
+                              echo "::warning file=$proj,line=1,col=1::${line}"
+                          fi
                         done
                       else
                         # если и report пуст, и stdout не содержит подходящих строк
