@@ -55,6 +55,10 @@ internal class Program
         Console.WriteLine("profile — выводит данные пользователя");
         Console.WriteLine("add \"текст задачи\" — добавляет новую задачу");
         Console.WriteLine("view — выводит все задачи");
+        Console.WriteLine("read \"idx\" — вывод задачи без редактирования");
+        Console.WriteLine("done \"idx\" — отметить задачу выполненной");
+        Console.WriteLine("delete \"idx\" — удалить задачу");
+        Console.WriteLine("update \"idx\" — изменить текст задачи");
         Console.WriteLine("exit — выход из программы");
     }
 
