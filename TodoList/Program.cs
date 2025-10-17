@@ -124,20 +124,20 @@ internal class Program
 
     private static void DeleteTodo(string command)
     {
-        var index = int.Parse(command.Split(' ')[1]);
+        var idx = int.Parse(command.Split(' ')[1]);
 
-        for (var i = index; i < index - 1; i++)
+        for (var i = idx; i < index - 1; i++)
         {
             todos[i] = todos[i + 1];
             statuses[i] = statuses[i + 1];
             dates[i] = dates[i + 1];
         }
 
-        index--;
-        Console.WriteLine($"Задача {index} удалена.");
-    }
+        Console.WriteLine($"Задача {idx} удалена.");
+		index--;
+	}
 
-    private static void UpdateTodo(string command)
+	private static void UpdateTodo(string command)
     {
         var parts = command.Split(' ', 3);
         var index = int.Parse(parts[1]);
