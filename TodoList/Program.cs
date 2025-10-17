@@ -171,7 +171,7 @@ internal class Program
         Console.WriteLine(headerRow);
         Console.WriteLine(new string('-', headerRow.Length));
 
-        for (int i = 0; i < taskCount; i++)
+        for (int i = 0; i < index; i++)
         {
             if (string.IsNullOrEmpty(todos[i])) continue;
 
