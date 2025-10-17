@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-
-namespace TodoList;
+﻿namespace TodoList;
 
 internal class Program
 {
@@ -30,6 +28,7 @@ internal class Program
             else if (command.StartsWith("delete ")) DeleteTodo(command);
             else if (command.StartsWith("update ")) UpdateTodo(command);
             else if (command.StartsWith("view")) ViewTodo(command);
+            else if (command.StartsWith("read ")) ReadTodo(command);
             else Console.WriteLine("Неизвестная команда.");
         }
     }
@@ -154,7 +153,7 @@ internal class Program
         bool showIndex = flags.Contains("--index") || flags.Contains("-i") || showAll;
         bool showStatus = flags.Contains("--status") || flags.Contains("-s") || showAll;
         bool showDate = flags.Contains("--update-date") || flags.Contains("-d") || showAll;
-        
+
         int indexWidth = 8;
         int textWidth = 34;
         int statusWidth = 16;
@@ -164,15 +163,15 @@ internal class Program
         if (showIndex) headerRow += "Индекс".PadRight(indexWidth) + "|";
         if (showStatus) headerRow += "Статус".PadRight(statusWidth) + "|";
         if (showDate) headerRow += "Дата обновления".PadRight(dateWidth) + "|";
-        
+
         Console.WriteLine(headerRow);
         Console.WriteLine(new string('-', headerRow.Length));
 
         for (int i = 0; i < taskCount; i++)
         {
-            if (string.IsNullOrEmpty(tasks[i])) continue;
+            if (string.IsNullOrEmpty(todos[i])) continue;
 
-            string text = tasks[i].Replace("\r", " ").Replace("\n", " ");
+            string text = todos[i].Replace("\r", " ").Replace("\n", " ");
             if (text.Length > 30) text = text.Substring(0, 30) + "...";
 
             string status = statuses[i] ? "выполнена" : "не выполнена";
@@ -185,6 +184,20 @@ internal class Program
 
             Console.WriteLine(row);
         }
+    }
+    
+    private static void ReadTodo(string command)
+    {
+        var parts = command.Split(' ', 2);
+        int idx = int.Parse(parts[1]);
+
+        string status = statuses[idx] ? "выполнена" : "не выполнена";
+        string date = dates[idx].ToString("yyyy-MM-dd HH:mm");
+
+        Console.WriteLine($"Полный текст задачи {idx}:");
+        Console.WriteLine(todos[idx]);
+        Console.WriteLine($"Статус: {status}");
+        Console.WriteLine($"Дата последнего изменения: {date}");
     }
 
     private static void ExpandArrays()
