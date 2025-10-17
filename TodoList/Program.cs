@@ -48,21 +48,26 @@ internal class Program
         Console.WriteLine(text);
     }
 
-    private static void HelpCommand()
-    {
-        Console.WriteLine("Команды:");
-        Console.WriteLine("help — выводит список всех доступных команд с кратким описанием");
-        Console.WriteLine("profile — выводит данные пользователя");
-        Console.WriteLine("add \"текст задачи\" — добавляет новую задачу");
-        Console.WriteLine("view — выводит все задачи");
-        Console.WriteLine("read \"idx\" — вывод задачи без редактирования");
-        Console.WriteLine("done \"idx\" — отметить задачу выполненной");
-        Console.WriteLine("delete \"idx\" — удалить задачу");
-        Console.WriteLine("update \"idx\" — изменить текст задачи");
-        Console.WriteLine("exit — выход из программы");
-    }
+	private static void HelpCommand()
+	{
+		Console.WriteLine("Команды:");
+		Console.WriteLine("help — выводит список всех доступных команд с кратким описанием");
+		Console.WriteLine("profile — выводит данные пользователя");
+		Console.WriteLine("add \"текст задачи\" — добавляет новую задачу");
+		Console.WriteLine("    -m, --multi — добавить многострочную задачу");
+		Console.WriteLine("view — выводит все задачи");
+		Console.WriteLine("    -a, --all — показать все поля");
+		Console.WriteLine("    -i, --index — показать индекс");
+		Console.WriteLine("    -s, --status — показать статус");
+		Console.WriteLine("    -d, --update-date — показать дату");
+		Console.WriteLine("read \"idx\" — вывод задачи без редактирования");
+		Console.WriteLine("done \"idx\" — отметить задачу выполненной");
+		Console.WriteLine("delete \"idx\" — удалить задачу");
+		Console.WriteLine("update \"idx\" — изменить текст задачи");
+		Console.WriteLine("exit — выход из программы");
+	}
 
-    private static void ShowProfile()
+	private static void ShowProfile()
     {
         Console.WriteLine(firstName + " " + lastName + ", - " + age);
     }
@@ -106,11 +111,18 @@ internal class Program
     }
     private static string[] ParseFlags(string command)
     {
-        return command.Split(' ')
-        .Where(p => p.StartsWith("--") || p.StartsWith("-"))
-        .Select(p => p.Trim())
-        .ToArray();
-    }
+		return command.Split(' ')
+		.Where(p => p.StartsWith("--") || p.StartsWith("-"))
+		.SelectMany(p =>
+		{
+			if (p.StartsWith("--"))
+				return new[] { p.Trim() };
+
+			return p.Skip(1)
+					.Select(ch => "-" + ch);
+		})
+		.ToArray();
+	}
 
     private static void DoneTodo(string command)
     {
