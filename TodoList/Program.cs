@@ -66,7 +66,31 @@ internal class Program
 
     private static void AddTodo(string command)
     {
-        var task = command.Split("add ", 2)[1];
+        var flags = ParseFlags(command);
+        bool isMulti = flags.Contains("--multi") || flags.Contains("-m");
+
+        string task = "";
+        if (isMulti)
+        {
+            Console.WriteLine("Введите строки задачи (введите !exit для завершения):");
+            List<string> lines = new List<string>();
+
+            while (true)
+            {
+                Console.Write("> ");
+                string line = Console.ReadLine();
+                if (line == "!exit") break;
+                lines.Add(line);
+            }
+
+            task = string.Join("\n", lines);
+        }
+        else
+        {
+            task = command.Split("add", 2)[1].Trim();
+        }
+
+
         if (index == todos.Length)
             ExpandArrays();
 
@@ -76,6 +100,13 @@ internal class Program
 
         Console.WriteLine("Добавлена задача: " + index + ") " + task);
         index++;
+    }
+    private static string[] ParseFlags(string command)
+    {
+        return command.Split(' ')
+        .Where(p => p.StartsWith("--") || p.StartsWith("-"))
+        .Select(p => p.Trim())
+        .ToArray();
     }
 
     private static void DoneTodo(string command)
