@@ -33,7 +33,7 @@ public class TodoItem
 	public string GetShortInfo()
 	{
 		string text = Text.Replace("\r", " ").Replace("\n", " ");
-		if (text.Length > 30) text = text[..30] + "...";
+		if (text.Length > 30) text = text.Substring(0, 30) + "...";
 
 		string status = IsDone ? "выполнена" : "не выполнена";
 		return $"{text,-34}|{status,-16}|{LastUpdate:yyyy-MM-dd HH:mm}|";
