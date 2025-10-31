@@ -56,7 +56,7 @@ public static class CommandParser
 				{
 					TodoList = todoList,
 					TaskIndex = int.Parse(args.Split(" ", 2)[0]),
-					NewText = args
+					NewText = args.Split(" ", 2)[1]
 				};
 
 			case "profile":
