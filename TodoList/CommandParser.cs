@@ -1,8 +1,11 @@
+using TodoList.Commands;
+
 namespace TodoList;
 
 public static class CommandParser
 {
-	public static ICommand Parse(string input, TodoList todoList, Profile profile)
+	public static Profile profile = new Profile("Default", "User", 2000);
+	public static ICommand Parse(string input, TodoList todoList)
 	{
 		string[] parts = input.Trim().Split(' ', 2);
 		string commandName = parts[0].ToLower();
@@ -61,6 +64,12 @@ public static class CommandParser
 
 			case "profile":
 				return new ProfileCommand { Profile = profile };
+
+			case "setprofile":
+				return new SetProfileCommand
+				{
+					Parts = parts[1].Split()
+				};
 
 			case "help":
 				return new HelpCommand();

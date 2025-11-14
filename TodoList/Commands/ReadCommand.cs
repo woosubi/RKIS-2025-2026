@@ -1,12 +1,12 @@
-namespace TodoList;
+namespace TodoList.Commands;
 
-public class DeleteCommand : ICommand
+public class ReadCommand : ICommand
 {
 	public int TaskIndex { get; set; }
 	public TodoList TodoList { get; set; }
 
 	public void Execute()
 	{
-		TodoList.Delete(TaskIndex);
+		TodoList.Read(TaskIndex);
 	}
 }
