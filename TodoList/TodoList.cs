@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 namespace TodoList;
 public class TodoList
 {
-	TodoItem[] items = new TodoItem[2];
-	int index = 0;
+	public TodoItem[] items = new TodoItem[2];
+	public int index = 0;
 
 	public void Add(TodoItem item)
 	{

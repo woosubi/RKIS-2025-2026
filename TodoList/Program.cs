@@ -4,7 +4,6 @@ namespace TodoList;
 
 internal class Program
 {
-	private static TodoList todos = new();
 
 	public static void Main()
 	{
@@ -18,8 +17,9 @@ internal class Program
 			Console.WriteLine("Введите команду: ");
 			string input = Console.ReadLine();
 
-			ICommand command = CommandParser.Parse(input, todoList);
+			ICommand command = CommandParser.Parse(input);
 			command.Execute();
+			FileManager.SaveTodos(CommandParser.todoList);
 		}
 	}
 
