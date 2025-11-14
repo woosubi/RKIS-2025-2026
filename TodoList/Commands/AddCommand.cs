@@ -22,5 +22,6 @@ public class AddCommand : ICommand
 		}
 
 		TodoList.Add(new TodoItem(TaskText.Trim()));
+		Console.WriteLine($"Добавлена задача: {TaskText}");
 	}
 }

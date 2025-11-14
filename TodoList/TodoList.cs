@@ -1,33 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TodoList;
+﻿namespace TodoList;
 public class TodoList
 {
-	public TodoItem[] items = new TodoItem[2];
-	public int index = 0;
+	public List<TodoItem> items = [];
 
 	public void Add(TodoItem item)
 	{
-		if (index == items.Length)
-			IncreaseArray();
-
-		items[index] = item;
-		Console.WriteLine($"Добавлена задача: {index}) {item.Text}");
-		index++;
-	}
+		items.Add(item);
+			}
 
 	public void Delete(int idx)
 	{
-		for (var i = idx; i < index - 1; i++)
-		{
-			items[i] = items[i + 1];
-		}
-
-		index--;
+		items.RemoveAt(idx);
 		Console.WriteLine($"Задача {idx} удалена.");
 	}
 
@@ -63,7 +46,7 @@ public class TodoList
 		Console.WriteLine(headerRow);
 		Console.WriteLine(new string('-', headerRow.Length));
 
-		for (int i = 0; i < index; i++)
+		for (int i = 0; i < items.Count; i++)
 		{
 			string text = items[i].Text.Replace("\r", " ").Replace("\n", " ");
 			if (text.Length > 30) text = text.Substring(0, 30) + "...";
@@ -80,9 +63,4 @@ public class TodoList
 		}
 	}
 
-	private void IncreaseArray()
-	{
-		var newSize = items.Length * 2;
-		Array.Resize(ref items, newSize);
-	}
 }

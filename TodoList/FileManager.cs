@@ -25,7 +25,7 @@ public class FileManager
 	{
 		List<string> lines = [];
 
-		for (var i = 0; i < todoList.index; i++)
+		for (var i = 0; i < todoList.items.Count; i++)
 		{
 			var item = todoList.items[i];
 			var text = EscapeCsv(item.Text);
