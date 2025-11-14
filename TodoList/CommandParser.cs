@@ -34,13 +34,17 @@ public static class CommandParser
 				};
 				return viewCmd;
 
-			case "done":
-				return new DoneCommand
+			case "status":
 				{
-					TodoList = todoList,
-					TaskIndex = int.Parse(args)
-				};
-			
+					var newParts = parts[1].Trim().Split(' ');
+					return new SetStausCommand
+					{
+						TodoList = todoList,
+						TaskIndex = int.Parse(newParts[0]),
+						EnumValue = newParts[1]
+					};
+				}
+
 			case "read":
 				return new ReadCommand
 				{

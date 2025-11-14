@@ -31,10 +31,10 @@ public class TodoList
 		Console.WriteLine($"Задача {idx} удалена.");
 	}
 
-	public void MarkDone(int idx)
+	public void SetStatus(int idx, TodoStatus status)
 	{
-		items[idx].MarkDone();
-		Console.WriteLine($"Задача {items[idx].Text} отмечена выполненной");
+		items[idx].SetStatus(status);
+		Console.WriteLine($"Задача {items[idx].Text} изменена на {status}");
 	}
 
 	public void Update(int idx, string newText)
@@ -68,7 +68,7 @@ public class TodoList
 			string text = items[i].Text.Replace("\r", " ").Replace("\n", " ");
 			if (text.Length > 30) text = text.Substring(0, 30) + "...";
 
-			string status = items[i].IsDone ? "выполнена" : "не выполнена";
+			string status = items[i].Status.ToString();
 			string date = items[i].LastUpdate.ToString("yyyy-MM-dd HH:mm");
 
 			string row = text.PadRight(textWidth) + "|";

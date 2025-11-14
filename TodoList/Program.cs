@@ -8,6 +8,7 @@ internal class Program
 	public static void Main()
 	{
 		FileManager.EnsureDataDirectory(FileManager.DataDirPath);
+		if (!File.Exists(FileManager.TodoPath)) File.WriteAllText(FileManager.TodoPath, "");
 		if (!File.Exists(FileManager.ProfilePath)) File.WriteAllText(FileManager.ProfilePath, "Default User 2000");
 		Console.WriteLine("Выполнили курсанты группы 3833 Кучеренко и Мурза");
 		TodoList todoList = new();
