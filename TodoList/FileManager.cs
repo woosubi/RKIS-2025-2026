@@ -15,4 +15,9 @@ public class FileManager
 		File.WriteAllText(ProfilePath, $"{profile.FirstName} {profile.LastName} {profile.BirthYear}");
 	}
 
+	public static Profile LoadProfile()
+	{
+		var lines = File.ReadAllText(ProfilePath).Split();
+		return new Profile(lines[0], lines[1], int.Parse(lines[2]));
+	}
 }
